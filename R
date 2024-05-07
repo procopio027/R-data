@@ -1,0 +1,58 @@
+library(dplyr)
+library(Hmisc)
+library(basedosdados)
+library(set_billing_id)
+library(bigrquery)
+library(openxlsx)
+library(writexl)
+library(openxlsx)
+library(readr)
+library(stringr)
+library(tidyr)
+library(dplyr)
+library(readxl)
+library(read.csv)
+library(psych)
+
+setwd("C:\ANAC\TOTAL\TesteAN")
+#######################################################################################
+
+FEV19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", 2) %>%
+  select("Ano", "Mês.de.emissão", "mes_viagem", "ponto_origem_viagem", "quantidade_bilhetes") %>% as.Date(FEV19$mes_viagem, format = "%d/%m/%y")
+
+
+MAR19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet = 3) %>%
+  select("Ano", "Mês.de.emissão", "mes_viagem", "ponto_origem_viagem", "quantidade_bilhetes")
+
+ABR19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet = 4) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+MAI19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet = 5) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+JUN19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet = 6) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+JUL19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet = 7 ) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+AGO19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet =8) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+SET19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet =9) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+OUT19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet =10) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+NOV19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet =11) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+DEZ19 <- read.xlsx("2019 a 2024 (FINAL).xlsx", sheet =12) %>%
+  select("Ano", "Mês.de.emissão" , "mes_viagem",  "ponto_origem_viagem", "quantidade_bilhetes")
+
+list_of_data_frames <- list(MAR19, ABR19, MAI19, JUN19, JUL19, AGO19, SET19, OUT19, NOV19, DEZ19)
+
+ANTT_COMPLETO <- bind_rows(list_of_data_frames)
+
+write_xlsx(ANTT_COMPLETO, "ANTT19.xlsx")
